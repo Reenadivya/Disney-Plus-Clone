@@ -16,15 +16,16 @@ const Header = (props) => {
   const history = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
-  console.log(history);
+
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        history.push("/home");
+
+        history("/home");
       }
     });
-  }, [userName]);
+  });
 
   const signInWithGooglePopup = () => {
     if (!userName) {
@@ -41,7 +42,7 @@ const Header = (props) => {
         .signOut()
         .then(() => {
           dispatch(setSignOutState());
-          history.push("/");
+          history("/");
         })
         .catch((err) => alert(err.message));
     }
