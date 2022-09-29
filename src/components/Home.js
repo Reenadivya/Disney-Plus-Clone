@@ -25,7 +25,6 @@ const Home = (props) => {
     async function getMovies() {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        console.log(recommends);
         switch (doc.data().type) {
           case "recommend":
             recommends = [...recommends, { id: doc.id, ...doc.data() }];
