@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
@@ -22,10 +22,10 @@ const Header = (props) => {
       if (user) {
         setUser(user);
 
-        history("/home");
+        navigate("/home");
       }
     });
-  });
+  }, []);
 
   const signInWithGooglePopup = () => {
     if (!userName) {
@@ -42,7 +42,7 @@ const Header = (props) => {
         .signOut()
         .then(() => {
           dispatch(setSignOutState());
-          history("/");
+          navigate("/");
         })
         .catch((err) => alert(err.message));
     }
